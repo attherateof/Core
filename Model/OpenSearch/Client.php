@@ -26,11 +26,11 @@ use OpenSearch\Client as OpenSearchClient;
 use RuntimeException;
 
 /**
- * Search Client
+ * OpenSearch Search Client
  *
  * Class Client
  *
- * @namespace MageStack\Core\Model\OpenSearch
+ * namespace MageStack\Core\Model\OpenSearch
  */
 class Client
 {
@@ -41,8 +41,7 @@ class Client
      */
     public function __construct(
         private readonly ConnectionManager $client
-    ) {
-    }
+    ) {}
 
     /**
      * Get OpenSearch Client

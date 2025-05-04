@@ -28,10 +28,12 @@ use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Psr\Log\LoggerInterface;
 
 /**
- * Class SearchService
- *
  * This class is responsible for executing search queries against an OpenSearch index.
  * It handles the construction of the query, execution, and mapping of the response.
+ * 
+ * Class SearchService
+ * 
+ * namespace MageStack\Core\Model\OpenSearch
  */
 class SearchService
 {

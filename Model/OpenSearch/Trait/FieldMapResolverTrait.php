@@ -20,6 +20,13 @@ declare(strict_types=1);
 
 namespace MageStack\Core\Model\OpenSearch\Trait;
 
+/**
+ * Trait for resolving field mappings between Magento and Opensearch.
+ *
+ * Class FieldMapResolverTrait
+ *
+ * namespace MageStack\Core\Model\OpenSearch\Trait
+ */
 trait FieldMapResolverTrait
 {
     /**

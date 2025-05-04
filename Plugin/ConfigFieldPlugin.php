@@ -22,6 +22,13 @@ namespace MageStack\Core\Plugin;
 
 use Magento\Config\Model\Config\Structure\Element\Field as Subject;
 
+/**
+ * Plugin for ConfigField to show path hints.
+ * 
+ * Class ConfigFieldPlugin
+ *
+ * namespace MageStack\Core\Plugin
+ */
 class ConfigFieldPlugin
 {
     /**

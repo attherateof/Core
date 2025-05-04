@@ -20,6 +20,13 @@ declare(strict_types=1);
 
 namespace MageStack\Core\Model\OpenSearch\Trait;
 
+/**
+ * Trait for mapping OpenSearch response to a standardized format.
+ *
+ * Class ResponseMapperTrait
+ * 
+ * namespace MageStack\Core\Model\OpenSearch\Trait
+ */
 trait ResponseMapperTrait
 {
     /**

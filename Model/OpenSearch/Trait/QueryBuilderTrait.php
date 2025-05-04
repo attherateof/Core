@@ -23,6 +23,13 @@ namespace MageStack\Core\Model\OpenSearch\Trait;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use LogicException;
 
+/**
+ * Trait for building OpenSearch queries.
+ *
+ * Class QueryBuilderTrait
+ *
+ * namespace MageStack\Core\Model\OpenSearch\Trait
+ */
 trait QueryBuilderTrait
 {
     /**

@@ -11,21 +11,21 @@ This is a core Magestack module provides reusable logics to other dependent modu
 
 ## Main Functionalities
 - Provides reusable **OpenSearch** data provider to display data in admin grid
-- Core configuration path management
+- Core configuration path hints
 
 ## Installation
 1. **Install the module via Composer**:
     To install this module, run the following command in your Magento root directory:
-    ``composer require mage-stack/module-core``
+    - ``composer require mage-stack/module-core``
 2. **Enable the module:**
     After installation, enable the module by running:
-   ``php bin/magento module:enable MageStack_Core``
+   - ``php bin/magento module:enable MageStack_Core``
 3. **Apply database updates:**
     Run the setup upgrade command to apply any database changes:
-    ``php bin/magento setup:upgrade``
+    - ``php bin/magento setup:upgrade``
 4. **Flush the Magento cache:**
     Finally, flush the cache:
-    ``php bin/magento cache:flush``
+   -  ``php bin/magento cache:flush``
 
 ## Usage
 Once installed and enabled, the functionalities provided by this module are seamlessly available within your Magento 2 application.
