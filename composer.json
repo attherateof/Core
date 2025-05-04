@@ -1,0 +1,26 @@
+{
+    "name": "mage-stack/module-core",
+    "description": "Core module provide reusable logic for other dependent modules",
+    "type": "magento2-module",
+    "license": "MIT",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Amit Biswas",
+            "email": "amit.biswas.webdeveloper@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require": {
+        "magento/framework": "103.0.8"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "MageStack\\Core\\": ""
+        }
+    }
+}
