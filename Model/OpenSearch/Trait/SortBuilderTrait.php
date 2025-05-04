@@ -27,7 +27,7 @@ use LogicException;
  * Create sorting for OpenSearch queries.
  *
  * Class SortBuilder
- * 
+ *
  * namespace MageStack\Core\Model\OpenSearch\Trait
  */
 trait SortBuilderTrait

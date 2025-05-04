@@ -29,9 +29,9 @@ use Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider as Core
 
 /**
  * DataProvider class for OpenSearch.
- * 
+ *
  * Class DataProvider
- * 
+ *
  * namespace MageStack\Core\Model\OpenSearch
  *
  * @SuppressWarnings(PHPMD.ExcessiveParameterList)

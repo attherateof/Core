@@ -42,7 +42,8 @@ class Client
      */
     public function __construct(
         private readonly ConnectionManager $client
-    ) {}
+    ) {
+    }
 
     /**
      * Get OpenSearch Client
