@@ -22,5 +22,9 @@
         "psr-4": {
             "MageStack\\Core\\": ""
         }
+    },
+    "homepage": "https://github.com/attherateof/Core",
+    "support": {
+        "issues": "https://github.com/attherateof/Core/issues"
     }
 }

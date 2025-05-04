@@ -14,6 +14,7 @@
  * @author    Amit Biswas <amit.biswas.webdeveloper@gmail.com>
  * @copyright 2025 MageStack
  * @license   https://opensource.org/licenses/MIT  MIT License
+ * @link      https://github.com/attherateof/Core
  */
 
 declare(strict_types=1);
