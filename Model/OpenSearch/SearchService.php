@@ -27,6 +27,7 @@ use MageStack\Core\Model\OpenSearch\Trait\ResponseMapperTrait;
 use MageStack\Core\Model\OpenSearch\Trait\SortBuilderTrait;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use MageStack\Core\Api\OpenSearch\ConfigInterface as OpenSearchConfig;
+use MageStack\Core\Api\OpenSearch\IndexResolverInterface;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -54,12 +55,17 @@ class SearchService
     private const DEFAULT_SORT_DIRECTION = 'desc';
 
     /**
+     * @var string|null
+     */
+    private ?string $resolvedIndex = null;
+
+    /**
      * Constructor
      *
      * @param Client $searchClient Opensearch client
      * @param TimezoneInterface $timezoneInterface Timezone interface for date handling
      * @param LoggerInterface|null $logger Optional logger for error handling
-     * @param string $index Opensearch index name
+     * @param string $index Opensearch index
      * @param array<string, array{
      *     field: string,
      *     data_type: 'keyword'|'date'|'text',
@@ -72,7 +78,7 @@ class SearchService
         public readonly TimezoneInterface $timezoneInterface,
         private readonly OpenSearchConfig $openSearchConfig,
         private readonly ?LoggerInterface $logger = null,
-        private readonly string $index = '', // Index should be passed or configured
+        private readonly array $index = [], // Index should be passed or configured
         private readonly array $map = []    // Map should be passed or configured
     ) {
         $this->__QueryBuilderConstruct($timezoneInterface);
@@ -246,7 +252,7 @@ class SearchService
         }
 
         return [
-            'index' =>  $this->openSearchConfig->getIndexPrefix() . $this->index,
+            'index' =>  $this->getIndex(),
             'body' => $body,
         ];
     }
@@ -262,6 +268,39 @@ class SearchService
     {
         $page = max(1, (int)($paging['current'] ?? 1));
         $pageSize = (int)($paging['pageSize'] ?? self::DEFAULT_PAGE_SIZE);
+
         return ($page - 1) * $pageSize;
+    }
+
+    /**
+     * Returns the OpenSearch index name
+     *
+     * @return string The OpenSearch index name
+     *
+     * @throws \RuntimeException If the index resolver is not valid
+     */
+    private function getIndex(): string
+    {
+        if ($this->resolvedIndex !== null) {
+            return $this->resolvedIndex;
+        }
+    
+        $resolver = $this->index['class'] ?? null;
+        $method = $this->index['method'] ?? null;
+    
+        if (!$resolver instanceof IndexResolverInterface) {
+            $type = is_object($resolver) ? get_class($resolver) : gettype($resolver);
+            throw new \RuntimeException(
+                __('Class %1 must implement IndexResolverInterface', $type)->render()
+            );
+        }
+    
+        if (!is_string($method) || !method_exists($resolver, $method)) {
+            throw new \RuntimeException(
+                __('Method %1 is not callable on class %2', $method ?? 'null', get_class($resolver))->render()
+            );
+        }
+    
+        return $this->resolvedIndex = $resolver->$method();
     }
 }

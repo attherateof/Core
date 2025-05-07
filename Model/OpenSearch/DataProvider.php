@@ -49,8 +49,6 @@ class DataProvider extends CoreDataProvider
      * @param SearchCriteriaBuilder $criteriaBuilder
      * @param RequestInterface $request
      * @param FilterBuilder $filterBuilder
-     * @param string $index
-     * @param array<int|string, mixed> $map
      * @param array<int|string, mixed> $meta
      * @param array<int|string, mixed> $data
      */
@@ -63,8 +61,6 @@ class DataProvider extends CoreDataProvider
         SearchCriteriaBuilder $criteriaBuilder,
         RequestInterface $request,
         FilterBuilder $filterBuilder,
-        public readonly string $index = '',
-        public readonly array $map = [],
         array $meta = [],
         array $data = []
     ) {
