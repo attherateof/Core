@@ -26,9 +26,9 @@ use MageStack\Core\Model\OpenSearch\Trait\QueryBuilderTrait;
 use MageStack\Core\Model\OpenSearch\Trait\ResponseMapperTrait;
 use MageStack\Core\Model\OpenSearch\Trait\SortBuilderTrait;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
-use MageStack\Core\Api\OpenSearch\ConfigInterface as OpenSearchConfig;
 use MageStack\Core\Api\OpenSearch\IndexResolverInterface;
 use Psr\Log\LoggerInterface;
+use RuntimeException;
 
 /**
  * This class is responsible for executing search queries against an OpenSearch index.
@@ -65,7 +65,7 @@ class SearchService
      * @param Client $searchClient Opensearch client
      * @param TimezoneInterface $timezoneInterface Timezone interface for date handling
      * @param LoggerInterface|null $logger Optional logger for error handling
-     * @param string $index Opensearch index
+     * @param array<int|string, mixed> $index Opensearch index
      * @param array<string, array{
      *     field: string,
      *     data_type: 'keyword'|'date'|'text',
@@ -76,7 +76,6 @@ class SearchService
     public function __construct(
         private readonly Client $searchClient,
         public readonly TimezoneInterface $timezoneInterface,
-        private readonly OpenSearchConfig $openSearchConfig,
         private readonly ?LoggerInterface $logger = null,
         private readonly array $index = [], // Index should be passed or configured
         private readonly array $map = []    // Map should be passed or configured
@@ -277,7 +276,7 @@ class SearchService
      *
      * @return string The OpenSearch index name
      *
-     * @throws \RuntimeException If the index resolver is not valid
+     * @throws RuntimeException If the index resolver is not valid
      */
     private function getIndex(): string
     {
@@ -289,14 +288,14 @@ class SearchService
         $method = $this->index['method'] ?? null;
     
         if (!$resolver instanceof IndexResolverInterface) {
-            $type = is_object($resolver) ? get_class($resolver) : gettype($resolver);
-            throw new \RuntimeException(
+            $type = is_object($resolver) ? get_class($resolver) : '';
+            throw new RuntimeException(
                 __('Class %1 must implement IndexResolverInterface', $type)->render()
             );
         }
     
         if (!is_string($method) || !method_exists($resolver, $method)) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 __('Method %1 is not callable on class %2', $method ?? 'null', get_class($resolver))->render()
             );
         }
