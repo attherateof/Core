@@ -26,6 +26,7 @@ use MageStack\Core\Model\OpenSearch\Trait\QueryBuilderTrait;
 use MageStack\Core\Model\OpenSearch\Trait\ResponseMapperTrait;
 use MageStack\Core\Model\OpenSearch\Trait\SortBuilderTrait;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
+use MageStack\Core\Api\OpenSearch\ConfigInterface as OpenSearchConfig;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -69,6 +70,7 @@ class SearchService
     public function __construct(
         private readonly Client $searchClient,
         public readonly TimezoneInterface $timezoneInterface,
+        private readonly OpenSearchConfig $openSearchConfig,
         private readonly ?LoggerInterface $logger = null,
         private readonly string $index = '', // Index should be passed or configured
         private readonly array $map = []    // Map should be passed or configured
@@ -244,7 +246,7 @@ class SearchService
         }
 
         return [
-            'index' => $this->index,
+            'index' =>  $this->openSearchConfig->getIndexPrefix() . $this->index,
             'body' => $body,
         ];
     }
